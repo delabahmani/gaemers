@@ -16,3 +16,5 @@ const PostPage = async ({ params }: { params: any }) => {
 };
 
 export default PostPage;
+
+export const revalidate = 10;
