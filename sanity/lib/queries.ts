@@ -5,14 +5,14 @@ export const postsQuery = groq`*[_type == "post"] {
   _createdAt,
   title,
   slug,
-  mainImage,
-  "imageURL": mainImage.asset->url,
+  gallery,
+  "imageURL": gallery.asset->url,
   "authorName": author->name,
 }`;
 
 // Get a single post by its slug
 export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
-    title, description, mainImage, body
+    title, description, gallery, body
   }`;
 
 // Get all post slugs
