@@ -13,7 +13,7 @@ const builder = imageUrlBuilder(client);
 
 const Post = ({ post }: { post: SanityDocument }) => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -31,28 +31,32 @@ const Post = ({ post }: { post: SanityDocument }) => {
   const randomClass = getRandomBackgroundClass();
 
   return (
-    <main className="container mx-auto prose dark:prose-invert prose-xl prose-h2:text-center prose-p:text-teal-50 px-4 py-16">
-      <h1 className={`text-center ${randomClass}`}>{post?.title}</h1>
+    <main className="mx-auto prose dark:prose-invert prose-xl prose-h2:text-center prose-p:text-teal-50 px-4 py-12">
+      <h1 className={`post-header text-center text-5xl ${randomClass}`}>{post?.title}</h1>
+      <div className="w-[90%] mx-auto">
       <Slider {...settings}>
         {post?.gallery?.map((imageObject: any, index: any) => {
           return (
             <div key={index}>
               <Image
-                className="mx-auto"
+                className="mx-auto w-[300px] h-[250px] object-cover "
                 src={builder
                   .image(imageObject.image)
                   .width(700)
-                  .height(500)
+                  .height(600)
                   .url()}
                 alt={imageObject.alt}
                 width={700}
-                height={500}
+                height={600}
               />
             </div>
           );
         })}
       </Slider>
+      </div>
+      <div className="prose-h2:text-teal-50 prose-h2:mt-2  prose-h4:text-gray-400 prose-p:text-base ">
       {post?.body ? <PortableText value={post.body} /> : null}
+      </div>
     </main>
   );
 };
